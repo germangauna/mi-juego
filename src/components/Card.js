@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+{/*lo reemplamos por la view que contenia a todo el modal*/ }
 
 const Card = ({ style, children }) => {
 {  /* React.useEffect(() => {
