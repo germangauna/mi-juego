@@ -1,19 +1,19 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { StyleSheet, TextInput } from 'react-native'
 import React from 'react'
-{/*se reemplaza el textinpu por este que acabamos de crear, en StartGameScreen*/}
-const Input = (style, ...otherPros) => {
+
+const Input = ({ style, ...otherPros }) => { //se reemplaza el textInput por este que acabamos de crear, en StartGameScreen, para hacer el contador de numeros
+// eact.useEffect(() => { console.log('othersProps', otherPros)}, [])
+    
   return (
-    <View>
           <TextInput style={[styles.input, style]} {...otherPros} />
-    </View>
   )
 }
 export default Input
 const styles = StyleSheet.create({
     input: {
-        height: 30,
+        height: 35,
         borderBottomColor: 'grey',
-        borderBottomWidth: 1,
+        borderBottomWidth: 2,
         marginVertical: 10
     }
 })

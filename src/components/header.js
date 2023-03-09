@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 
 import React from 'react'
-import  Colors  from '../constantes/Colors'
+import Colors  from '../constantes/Colors'
 
 const Header = ({title}) => { //RECIBE COMO PROPS EL TITULO
     return (
@@ -27,5 +27,5 @@ const styles = StyleSheet.create({
         color: 'black',
         fontSize: 30,
         fontWeight: 'bold'
-}    
+},
 })

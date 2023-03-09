@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React from 'react'
+
 {/*lo reemplamos por la view que contenia a todo el modal*/ }
 
-const Card = ({ style, children }) => {
-{  /* React.useEffect(() => {
+const Card = ({style, children }) => {
+    {/* React.useEffect(() => {
         console.log('Card mounted');
         console.log('Card childre', children);
     }, []) asi verificamos con el useEffect los hijos*/}
@@ -19,10 +20,10 @@ const styles = StyleSheet.create({
         shadowColor: 'black',
         shadowOffset: {
             width: 0,
-            height: 2,
+            height: 2
         },
         shadowRadius: 6,
-        shadowOpacity: 0.25,
+        shadowOpacity: 0.26,
         elevation: 5,
         borderRadius: 10,
         backgroundColor: 'white',
