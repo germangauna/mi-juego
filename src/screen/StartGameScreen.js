@@ -6,18 +6,39 @@ import {
     TouchableWithoutFeedback,
     View
 } from 'react-native'
-import React from 'react'
+
 import Card from '../components/Card'
 import Colors from '../constantes/Colors'
 import Input from ' ../components/Input'
+import React from 'react'
+import { titleStyle } from '../constants/TextStyles'
 
-const StartGameScreen = () => {
+const StartGameScreen = ({ onStartGame}) => {
 
     const [enteredValue, setEnteredValue] = React.useState('')
 {/*funcionalidad del handler hacemos un useState con el valor ingresado,
 todo lo que sea distinto a un numero lo cambia por un vacio, lo declaramos abajo */ }
-    const numberInputHandler = inputText => {
-         setEnteredValue(inputText.replace(/[^0-9]/g,''))
+    const [confirmed, setConfirmed] = React.useState(false)
+    const [selectedNumber, setSelectedNumber] = React.useState()
+    //estos 2 estatados 1 para limpiar y el otro para confirmar
+const numberInputHandler = inputText => {
+    setEnteredValue(inputText.replace(/[^0-9]/g, ''))
+  }
+
+  const resetInputHandler = () => {
+    setEnteredValue('');
+    setConfirmed(false);
+  }
+    //con estas funciones estamos confrimando, y parceando que sea >o < q cero
+     const confirmInputHandler = () => {
+     const chosenNumber = parseInt(enteredValue)
+      if (chosenNumber === NaN || chosenNumber <= 0 || chosenNumber > 99) {
+      return
+    }
+    // se confirma en true, despues ee parcea y por ultimo se setea el valor del input vacio    
+        setConfirmed(true)
+        setSelectedNumber(chosenNumber)
+        setEnteredValue('')
     }
     
     return (
@@ -25,8 +46,8 @@ todo lo que sea distinto a un numero lo cambia por un vacio, lo declaramos abajo
             Keyboard.dismiss()
         }}>
     <View style={styles.container}>
-          <Text style={styles.title}>Comenzar el Juego</Text>
-          <Card style={styles.inputContainer}>
+        <Text style={styles.title}>Comenzar el Juego</Text>
+        <Card style={styles.inputContainer}>
             <Text style={styles.inputDescriptionText}>Selecciona el Numero</Text>
             {/*todas estas propts son las que hacen el contador de numeros*/ }      
               <Input style={styles.input}
@@ -46,7 +67,16 @@ todo lo que sea distinto a un numero lo cambia por un vacio, lo declaramos abajo
                       <Button title='Confirmar' onPress={() => {}} color={Colors.primary}/>
                   </View>
               </View>
-       </Card>
+        </Card>
+        {confirmed &&
+          <Card style={styles.selectedNumberContainer}>
+            <Text>Tu seleccion</Text>
+            <NumberContainer>{selectedNumber}</NumberContainer>
+            <Button title="Iniciar Juego" onPress={()=>{
+              onStartGame(selectedNumber)
+            }}/>
+          </Card>
+        }     
     </View>
 </TouchableWithoutFeedback>
   )
@@ -61,9 +91,7 @@ const styles = StyleSheet.create({
         
     },
     title: {
-        fontSize: 20,
-        marginVertical: 10,
-        textAlign: 'center'
+        ...titleStyle,
     },
     inputContainer: {
         width: 300,
@@ -86,7 +114,14 @@ const styles = StyleSheet.create({
     },
     button: {
     width: 100
-}
+    },
+    selectedNumberContainer: {
+        marginTop: 20,
+        width: 200,
+        maxWidth: '80%',
+        pading: 10,
+        textAlign: 'center'
+    }
 
     
     
